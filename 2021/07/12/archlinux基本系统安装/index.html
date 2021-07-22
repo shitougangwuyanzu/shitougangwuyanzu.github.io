@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="文章推送测试, 石头岗吴彦祖的Blog">
+    <meta name="keywords" content="archlinux基本系统安装, 石头岗吴彦祖的Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>文章推送测试 | 石头岗吴彦祖的Blog</title>
+    <title>archlinux基本系统安装 | 石头岗吴彦祖的Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">文章推送测试</h1>
+                    <h1 class="description center-align post-title">archlinux基本系统安装</h1>
                 </div>
             </div>
         </div>
@@ -368,8 +368,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">测试</span>
+                            <a href="/tags/Archlinux%E5%AE%89%E8%A3%85/">
+                                <span class="chip bg-color">Archlinux安装</span>
                             </a>
                         
                     </div>
@@ -380,8 +380,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category">
-                                测试
+                            <a href="/categories/Archlinux/" class="post-category">
+                                Archlinux
                             </a>
                         
                     </div>
@@ -393,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-11
+                    2021-07-12
                 </div>
                 
 
@@ -414,8 +414,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="推送测试"><a href="#推送测试" class="headerlink" title="推送测试"></a>推送测试</h1><h2 id="2021-04-10-23：09-推送"><a href="#2021-04-10-23：09-推送" class="headerlink" title="2021-04-10 23：09 推送"></a>2021-04-10 23：09 推送</h2><p>04-11 14:00 更新。</p>
-
+                <h1 id="下载ISO镜像并刻录"><a href="#下载ISO镜像并刻录" class="headerlink" title="下载ISO镜像并刻录"></a>下载ISO镜像并刻录</h1><p>我这里为efi启动,刻录不赘述。</p>
+<h1 id="联网-（无网无arch）"><a href="#联网-（无网无arch）" class="headerlink" title="联网 （无网无arch）"></a>联网 （无网无arch）</h1><p>有线网插网线就有网络<br>无线网：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iwctl                               <span class="comment">#进入联网工具</span></span><br><span class="line">device list                         <span class="comment">#列出网络设备名 ，我这为wlan0</span></span><br><span class="line">station xxxx get-networks           </span><br><span class="line">station xxxx connect your_wifi_name <span class="comment">#连接wifi</span></span><br><span class="line"><span class="built_in">exit</span>                                <span class="comment">#退出</span></span><br></pre></td></tr></table></figure>
+<p>ping 一下是否联通</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping baidu.com</span><br></pre></td></tr></table></figure>
+<h1 id="分区并挂载"><a href="#分区并挂载" class="headerlink" title="分区并挂载"></a>分区并挂载</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l <span class="comment">#查看磁盘，这里使用/dev/sda</span></span><br></pre></td></tr></table></figure>
+<p>可用cfdisk</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p>分区如下<br>图片</p>
+<p>写入退出</p>
+<p>格式化磁盘  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat /dev/sda1 </span><br><span class="line">mkfs.ext4 /dev/sda3</span><br><span class="line">mkfs.ext4 /dev/sda4</span><br><span class="line">mkswap /dev/sda2</span><br><span class="line">swapon /dev/sda2</span><br></pre></td></tr></table></figure>
+<p>挂载分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda3 /mnt         <span class="comment">#先挂载</span></span><br><span class="line">mkdir -p /mnt/boot/EFI       </span><br><span class="line">mount /dev/sda1 /mnt/boot/EFI</span><br><span class="line">mkdir /mnt/home</span><br><span class="line">mount /dev/sda4 /mnt/home</span><br></pre></td></tr></table></figure>
+<h1 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h1><p>换国内源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist 可以自己编辑加入国内源</span><br><span class="line"><span class="comment"># http://mirrors.ustc.edu.cn/help/archlinux.html</span></span><br><span class="line">reflector <span class="comment">#用这个（好像）可以自动找出速度快的源</span></span><br></pre></td></tr></table></figure>
+<h1 id="安装基本系统"><a href="#安装基本系统" class="headerlink" title="安装基本系统"></a>安装基本系统</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用pacstap安装：</span></span><br><span class="line">pacstrap /mnt base base-devel linux linux-firmware dhcpcd iwd vim sudo bash-completion</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装完成后用genfstab：</span></span><br><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="comment">#查看一下fstab：</span></span><br><span class="line">cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h1 id="系统设置以及安装引导"><a href="#系统设置以及安装引导" class="headerlink" title="系统设置以及安装引导"></a>系统设置以及安装引导</h1><h2 id="change-root"><a href="#change-root" class="headerlink" title="change root"></a>change root</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<h2 id="本地化设置"><a href="#本地化设置" class="headerlink" title="本地化设置"></a>本地化设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.主机名与时区：</span></span><br><span class="line">vim /etc/hostname <span class="comment">#加入你的主机名</span></span><br><span class="line">vim /etc/hosts   <span class="comment">#加入下面内容</span></span><br><span class="line"></span><br><span class="line">127.0.0.1   localhost</span><br><span class="line">::1         localhost</span><br><span class="line">127.0.1.1   你的主机名.localdomain    你的主机名</span><br><span class="line"></span><br><span class="line"><span class="comment">#2.时区</span></span><br><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">timedatectl set-ntp <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.设置locale</span></span><br><span class="line">编辑 /etc/locale.gen，去掉 en_US.UTF-8 行以及 zh_CN.UTF-8 的注释符号后：  </span><br><span class="line">locale-gen  </span><br><span class="line">向 /etc/locale.conf 输入内容：</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;LANG=en_US.UTF-8&#x27;</span>  &gt; /etc/locale.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#4.安装grub引导</span></span><br><span class="line">passwd root <span class="comment">#设置root密码</span></span><br><span class="line"></span><br><span class="line">pacman -S grub efibootmgr os-prober(双系统需要)</span><br><span class="line"></span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ArchLinux</span><br><span class="line"></span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="完成安装"><a href="#完成安装" class="headerlink" title="完成安装"></a>完成安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br><span class="line">至此，一个不带桌面环境的Archlinux安装好了</span><br></pre></td></tr></table></figure>
                 
             </div>
             <hr/>
@@ -441,7 +459,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://shitougangwuyanzu.github.io/2021/04/11/%E6%96%87%E7%AB%A0%E6%8E%A8%E9%80%81%E6%B5%8B%E8%AF%95/">https://shitougangwuyanzu.github.io/2021/04/11/%E6%96%87%E7%AB%A0%E6%8E%A8%E9%80%81%E6%B5%8B%E8%AF%95/</a>
+                    <a href="https://shitougangwuyanzu.github.io/2021/07/12/archlinux%E5%9F%BA%E6%9C%AC%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">https://shitougangwuyanzu.github.io/2021/07/12/archlinux%E5%9F%BA%E6%9C%AC%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -479,8 +497,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">测试</span>
+                                <a href="/tags/Archlinux%E5%AE%89%E8%A3%85/">
+                                    <span class="chip bg-color">Archlinux安装</span>
                                 </a>
                             
                         </div>
@@ -523,9 +541,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/07/12/archlinux%E5%9F%BA%E6%9C%AC%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">
                     <div class="card-image">
@@ -543,9 +562,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -558,6 +577,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -576,13 +596,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/11/%E6%B5%8B%E8%AF%95/">
+                <a href="/2021/04/11/%E6%96%87%E7%AB%A0%E6%8E%A8%E9%80%81%E6%B5%8B%E8%AF%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="测试">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="文章推送测试">
                         
-                        <span class="card-title">测试</span>
+                        <span class="card-title">文章推送测试</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
